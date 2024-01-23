@@ -8,7 +8,8 @@ var connectionString = builder.Configuration.GetConnectionString("LoginMVC_DbCon
 
 builder.Services.AddDbContext<LoginMVC_DbContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<LoginMVC_DatabaseUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<LoginMVC_DbContext>();
+builder.Services.AddDefaultIdentity<LoginMVC_DatabaseUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<LoginMVC_DbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -35,6 +36,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.MapRazorPages();
 
 app.Run();
