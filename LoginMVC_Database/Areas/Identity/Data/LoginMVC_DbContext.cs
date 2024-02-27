@@ -1,4 +1,5 @@
 ﻿using LoginMVC_Database.Areas.Identity.Data;
+using LoginMVC_Database.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,8 @@ public class LoginMVC_DbContext : IdentityDbContext<LoginMVC_DatabaseUser>
         : base(options)
     {
     }
+
+    public DbSet<FakePersonData> FakePeople { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

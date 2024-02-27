@@ -4,6 +4,7 @@ using LoginMVC_Database.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LoginMVC_Database.Migrations
 {
     [DbContext(typeof(LoginMVC_DbContext))]
-    partial class LoginMVC_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20240227171011_FakePeopleTest")]
+    partial class FakePeopleTest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
