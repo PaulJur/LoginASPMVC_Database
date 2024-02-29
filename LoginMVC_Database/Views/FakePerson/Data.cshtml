@@ -1,17 +1,19 @@
 ﻿@model List<LoginMVC_Database.Models.FakePersonData>
 
 @{
-    ViewData["Title"] = "Employee Details";
+    ViewData["Title"] = "Fake Person Details";
 }
 
 <h3>@ViewData["Title"]</h3>
 <hr />
 
-<div class="text-center">
+<div>
 
     @if (User.Identity.IsAuthenticated)
     {
-        <form>
+        <a asp-controller="FakePerson" asp-action="Create" class="btn btn-primary mb-3">Create Person</a>
+
+      <form> 
         <table class="table table-responsive table-hover">
             <thead>
                 <tr class="table-active">
@@ -70,7 +72,11 @@
                     }
                     else
                     {
-                        
+                        <tr>
+                            <td colspan="6">
+                                No Person data available
+                            </td>
+                        </tr>
                     }
                 </tbody>
         </table>
