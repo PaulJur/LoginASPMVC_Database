@@ -1,0 +1,39 @@
+﻿@model FakePersonData
+
+<form method="post">
+    
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Edit Person</h2>
+            <hr />
+        </div>
+        <div asp-validation-summary="All" class="text-danger"></div> <!--This will display the error in a different text above all of the fields. List all the errors above the fields-->
+        <div class="mb-3 row p-1">
+            <label asp-for="FirstName" class="p-0"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="LastName" class="p-0"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="Age" class="p-0"></label>
+            <input asp-for="Age" class="form-control" />
+            <span asp-validation-for="Age" class="text-danger"></span>
+        </div>
+
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Update</button>
+            </div>
+            
+            <div class="col-6 col-md-3 mt-2">
+                <a asp-controller="FakePerson" asp-action="Data" class="btn btn-outline-secondary border form-control">
+                    Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+</form>
