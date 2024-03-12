@@ -28,8 +28,11 @@ namespace LoginMVC_Database.Controllers
                     return View(new List<FakePersonData>());
                 }
             }
+            else
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
 
-            return RedirectToAction("Error", "Shared");
         }
 
         public IActionResult Create()

@@ -11,17 +11,19 @@
 </head>
 <body>
     <header>
+        
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg- border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> Login/Register page test</a>
+            <div class="container-fluid ">
+                <div class="d-flex flex-row align-items-center">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> Login/Register page test</a>
+                    <div class="ml-auto">
+                        <partial name="_LoginPartial.cshtml" />
+                    </div>
+                </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
-            <div class=" d-flex flex-row">
-                <partial name="_LoginPartial.cshtml" />
-            </div>
 
                 <div class="">
                     <ul class="navbar-nav">
