@@ -3,19 +3,39 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4 fw-bold">Welcome to Test page</h1>
+    <h1 class="display-4 fw-bold"> Welcome to my MVC testing page</h1>
 
     <h2> An MVC login testing page made by Paulius</h2>
-    
-    <img  src="@Url.Content("Images/DB.jpg")" class="image-with-shadow " alt="Data example" width="1000" height="300" style="border: 1px solid black;"/>
+
+    <img  src="@Url.Content("Images/DB.jpg")" class="image-with-shadow" alt="Data example" width="1000" height="300"/>
+    <p> This website showcases the capabilities of Identity framework for login/register authentication, along with Entity Framework for database management. 
+    Built on ASP.NET MVC, it demonstrates role-based permissions for different CRUD operations.</p>
+
+    <img src="@Url.Content("Images/RolesDB.jpg")" class="image-with-shadow" alt="Data example" width="400" height="200" />
 </div>
 
-<style>
-    .image-with-shadow {
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5); /* Adjust values as needed */
-        border-radius: 8px; /* Optional: adds rounded corners */
-        margin-top: 50px;
-        max-width: 100%;
-        height: auto;
-    }
-</style>
+<div>
+    <ul class="no-bulletpoint">
+        <li> <i class="bi bi-person-gear"></i> Admins: Can use every CRUD operation that includes: Creating, Reading, Updating and Deleting.</li>
+        <li> <i class="bi bi-person-circle "> </i> Users: Can use limited CRUD operations that includes: Creating and Reading</li>
+    </ul>
+</div>
+
+<div class="image-with-shadow ">
+    <ul class="horizontal-list">
+        <li> <i class="bi bi-shield-lock-fill"></i> Microsoft Identity framework authentication <br />
+            Using Microsoft's Identity framework for authentication, users can securely log in to the application, manage their account settings,
+            and access restricted resources based on their roles and permissions.
+        </li>
+        <li clas>
+            <i class="bi bi-database-fill-check"></i> Entity framework ORM for back-end database <br /> Entity Framework (EF), 
+            also created by Microsoft, is an Object-Relational Mapping (ORM) framework designed to streamline database interactions in .NET applications. It simplifies work for developers
+            with database-related tasks by allowing developers to work with database entities using familiar object-oriented programming techniques.
+        </li>
+        <li>
+            <i class="bi bi-reception-4"></i> ASP.NET MVC <br /> ASP.NET Core, developed by Microsoft, is a powerful framework for building modern web applications. 
+            It enables developers to create cross-platform, high-performance web applications. 
+        </li>
+    </ul>
+</div>
+

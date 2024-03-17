@@ -44,3 +44,40 @@ body {
 .login-logout-card .card-body{
     padding: 10px 20px;
 }
+
+.image-with-shadow {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid black;
+}
+
+ul.no-bulletpoint li{
+    list-style-type: none;
+}
+
+ul.horizontal-list li {
+    list-style: none;
+    display: inline-block;
+    padding: 10px 5rem;
+    text-align: center;
+}
+
+.nav-bar-button-color {
+    color: blue;
+    padding: 0px 15px;
+    text-decoration: none;
+
+}
+
+.nav-bar-button-color:hover {
+    color:dodgerblue;
+
+}
+
+.nav-bar-large-main-text{
+    font-size: 23px;
+}
