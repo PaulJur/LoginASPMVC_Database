@@ -9,6 +9,7 @@ var connectionString = builder.Configuration.GetConnectionString("LoginMVC_DbCon
 builder.Services.AddDbContext<LoginMVC_DbContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<LoginMVC_DatabaseUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<LoginMVC_DbContext>();
 
 // Add services to the container.
@@ -38,5 +39,19 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
+
+using (var scope = app.Services.CreateScope())
+{
+    var roleMnager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>(); //get required service
+
+    var roles = new[] { "Admin", "User" };
+
+    foreach(var role in roles)
+    {
+        if (!await roleMnager.RoleExistsAsync(role))//Check if role exists in DB
+            await roleMnager.CreateAsync(new IdentityRole(role));
+    }
+
+}
 
 app.Run();
