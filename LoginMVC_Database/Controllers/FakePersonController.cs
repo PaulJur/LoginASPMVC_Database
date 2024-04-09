@@ -1,5 +1,6 @@
 ﻿using LoginMVC_Database.Data;
 using LoginMVC_Database.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LoginMVC_Database.Controllers
@@ -42,6 +43,7 @@ namespace LoginMVC_Database.Controllers
 
         [HttpPost]
 
+        [Authorize("Admin")]
         public IActionResult Create(FakePersonData obj)
         {
             if (_context.FakePeople.Any(n => n.LastName == obj.LastName && n.FirstName == obj.FirstName && n.Age == obj.Age)) //If First name and Last name and age are the same, give error

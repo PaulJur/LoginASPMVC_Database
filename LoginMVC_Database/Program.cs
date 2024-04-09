@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using LoginMVC_Database.Data;
 using LoginMVC_Database.Areas.Identity.Data;
+using LoginMVC_Database.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("LoginMVC_DbContextConnection") ?? throw new InvalidOperationException("Connection string 'LoginMVC_DbContextConnection' not found.");
@@ -52,6 +53,29 @@ using (var scope = app.Services.CreateScope())
             await roleMnager.CreateAsync(new IdentityRole(role));
     }
 
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<LoginMVC_DatabaseUser>>(); //get required service
+
+    string email = "admin@admin.com";
+    string password = "Admin123!";
+
+    if (await userManager.FindByNameAsync(email) == null)
+    {
+        var user = new LoginMVC_DatabaseUser();
+
+        user.UserName = email;
+        user.Email = email;
+        user.FirstName = "Admin";
+        user.LastName = "Admin";
+
+
+        await userManager.CreateAsync(user,password);
+
+        await userManager.AddToRoleAsync(user, "Admin");
+    }
 }
 
 app.Run();
