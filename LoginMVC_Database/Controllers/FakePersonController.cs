@@ -43,7 +43,7 @@ namespace LoginMVC_Database.Controllers
 
         [HttpPost]
 
-        [Authorize("Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create(FakePersonData obj)
         {
             if (_context.FakePeople.Any(n => n.LastName == obj.LastName && n.FirstName == obj.FirstName && n.Age == obj.Age)) //If First name and Last name and age are the same, give error
@@ -84,7 +84,7 @@ namespace LoginMVC_Database.Controllers
         }
 
         [HttpPost]
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(FakePersonData obj)//This is post http, meaning what the server receives from the user
         {
 
@@ -115,7 +115,7 @@ namespace LoginMVC_Database.Controllers
 
         [HttpPost, ActionName("Delete")]//this returns the input from the user side to the back-end and the actionName is "Delete"
         //send data to a server to create/update a resource
-
+        [Authorize(Roles = "Admin")]
         public IActionResult DeletePOST(int? id)
         {
             FakePersonData? obj = _context.FakePeople.Find(id);

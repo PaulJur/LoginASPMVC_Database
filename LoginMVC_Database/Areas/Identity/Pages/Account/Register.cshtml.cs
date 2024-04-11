@@ -92,7 +92,7 @@ namespace LoginMVC_Database.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "Emai")]
             public string Email { get; set; }
 
             /// <summary>
@@ -143,7 +143,7 @@ namespace LoginMVC_Database.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    await _userManager.AddToRoleAsync(user, "User");
+                    await _userManager.AddToRoleAsync(user, "User");//Gives the user the assigned role on creation.
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

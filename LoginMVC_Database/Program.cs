@@ -7,6 +7,7 @@ using LoginMVC_Database.Models;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("LoginMVC_DbContextConnection") ?? throw new InvalidOperationException("Connection string 'LoginMVC_DbContextConnection' not found.");
 
+
 builder.Services.AddDbContext<LoginMVC_DbContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<LoginMVC_DatabaseUser>(options => options.SignIn.RequireConfirmedAccount = false)
@@ -15,6 +16,8 @@ builder.Services.AddDefaultIdentity<LoginMVC_DatabaseUser>(options => options.Si
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSession();
 
 builder.Services.AddRazorPages();
 
@@ -34,6 +37,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

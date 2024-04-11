@@ -11,8 +11,9 @@
 
     @if (User.Identity.IsAuthenticated)
     {
+        if(User.IsInRole("Admin")){
         <a asp-controller="FakePerson" asp-action="Create" class="btn btn-primary mb-3">Create Person</a>
-
+        }
       <form> 
         <table class="table table-responsive table-hover">
             <thead>
@@ -58,13 +59,24 @@
                                 </td>
                                 <td>
                                     <div class="btn-group brn-group-sm">
-                                        <a asp-controller="FakePerson" asp-action="Edit" asp-route-Id="@person.Id" class="btn btn-primary">Edit</a>
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <a asp-controller="FakePerson" asp-action="Edit" asp-route-Id="@person.Id" class="btn btn-primary">Edit</a>
+                                        }
                                         
                                     </div>
 
                                     <div class="btn-group brn-group-sm">
-                                        <a asp-controller="FakePerson" asp-action="Delete" asp-route-Id="@person.Id" class="btn btn-danger">Delete</a>
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <a asp-controller="FakePerson" asp-action="Delete" asp-route-Id="@person.Id" class="btn btn-danger">Delete</a>
+                                        }else{
+                                            <div class="alert  alert-danger alert-sm my-md-auto small" role="alert">
+                                                No action allowed.
+                                            </div>
+                                        }
                                     </div>
+
                                 </td>
 
                             </tr>
