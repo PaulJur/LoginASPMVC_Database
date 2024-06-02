@@ -39,7 +39,7 @@ namespace LoginMVC_Database.Repository
 
         public async Task<FakePersonData> GetIdAsync(int id)
         {
-            return await _context.FakePeople.FirstOrDefaultAsync(i => i.Id == id);
+            return await _context.FakePeople.FirstOrDefaultAsync(i => i.Id == id); //Use .Include() before FirstOrDefaultAsync() if the entity has any related entities.
         }
 
         public async Task<IEnumerable<FakePersonData>> GetPersonByFirstName(string firstName)

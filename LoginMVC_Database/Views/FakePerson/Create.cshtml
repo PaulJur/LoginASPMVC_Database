@@ -7,14 +7,17 @@
             <h2 class="text-primary">Create Person</h2>
             <hr />
         </div>
-        <div asp-validation-summary="All" class="text-danger"></div> <!--This will display the error in a different text above all of the fields. List all the errors above the fields-->
+
+        <div asp-validation-summary="All" class="text-danger"></div>  <!--This will display the error in a different text above all of the fields. List all the errors above the fields-->
+        
+       
         <div class="mb-3 row p-1">
             <label asp-for="FirstName" class="p-0"></label>
             <input asp-for="FirstName" class="form-control" />
         </div>
         <div class="mb-3 row p-1">
             <label asp-for="LastName" class="p-0"></label>
-            <input asp-for="LastName" class="form-control" />
+            <input asp-for="LastName" class="form-control"/>
         </div>
         <div class="mb-3 row p-1">
             <label asp-for="Age" class="p-0"></label>

@@ -1,4 +1,5 @@
 ﻿using LoginMVC_Database.Data;
+using LoginMVC_Database.Interfaces;
 using LoginMVC_Database.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,20 +9,19 @@ namespace LoginMVC_Database.Controllers
     public class FakePersonController : Controller
     {
 
-        private readonly LoginMVC_DbContext _context;
+        private readonly ILoginMVCRepository _loginMVCRepository;
 
-        public FakePersonController(LoginMVC_DbContext context)
+        public FakePersonController(ILoginMVCRepository loginMVCRepository)
         {
-            _context = context;
+            _loginMVCRepository = loginMVCRepository;
         }
-        public IActionResult Data()
+        public async Task<IActionResult> Data()
         {
-            List<FakePersonData> objPersonDataList = _context.FakePeople.ToList();
-            if (User.Identity.IsAuthenticated && objPersonDataList != null)//checks if the user is logged in
+            if (User.Identity.IsAuthenticated)//checks if the user is logged in
             {
                 try
                 {
-                
+                    var objPersonDataList = await _loginMVCRepository.GetAllFakePeople();
                     return View(objPersonDataList);
                 }
                 catch (Exception ex)
@@ -44,9 +44,9 @@ namespace LoginMVC_Database.Controllers
         [HttpPost]
 
         [Authorize(Roles = "Admin")]
-        public IActionResult Create(FakePersonData obj)
+        public async Task<IActionResult> Create(FakePersonData fakePerson)
         {
-            if (_context.FakePeople.Any(n => n.LastName == obj.LastName && n.FirstName == obj.FirstName && n.Age == obj.Age)) //If First name and Last name and age are the same, give error
+           /* if (_context.FakePeople.Any(n => n.LastName == obj.LastName && n.FirstName == obj.FirstName && n.Age == obj.Age)) //If First name and Last name and age are the same, give error
             {
                 ModelState.AddModelError("name", "Cannot have an existing person added into the database");
             }
@@ -58,74 +58,72 @@ namespace LoginMVC_Database.Controllers
             {
                 ModelState.AddModelError("FirstName", "First Name cannot contain numbers");
             }
+            */
 
             if (ModelState.IsValid)//if everything from FakePersonController.cs is validated like maxlenght and display order, then return valid and execute
             {
-                _context.FakePeople.Add(obj);//This will add the category object(made by the user input) to the category table. This keeps track of the changes
-                _context.SaveChanges();//this makes the changes in the database table
+                _loginMVCRepository.AddFakePerson(fakePerson);//This will add the category object(made by the user input) to the fakeperson table. This keeps track of the changes
                 TempData["success"] = "Person created succesfully"; //"success" is the key name
                 return RedirectToAction("Data");//This will refresh the database table and show the new stuff
             }
-            return View(obj);//stays on the create category page
+            return View(fakePerson);//stays on the create category page
         }
-        public IActionResult Edit(int? id)//This is a server side check
+        public async Task <IActionResult> Edit(int id)//This is a server side check
         {
             if (id == null || id == 0)
             {
                 return NotFound();
             }
-            FakePersonData? FakePersonFromDb = _context.FakePeople.Find(id);//will work off the primary key off the model
+            var getPersonID = await _loginMVCRepository.GetIdAsync(id); //will work off the primary key off the model
 
-            if (FakePersonFromDb == null)
+            if (getPersonID == null)
             {
                 return NotFound();
             }
-            return View(FakePersonFromDb);
+            return View(getPersonID);
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public IActionResult Edit(FakePersonData obj)//This is post http, meaning what the server receives from the user
+        public async Task<IActionResult> Edit(FakePersonData fakePerson)//This is post http, meaning what the server receives from the user
         {
 
             if (ModelState.IsValid)//if everything from FakePersonData.cs is validated like maxlenght and Id, then return valid and execute
             {
-                _context.FakePeople.Update(obj);//This will Update the category object(made by the user input) to the category table. This keeps track of the changes
-                _context.SaveChanges();//this makes the changes in the database table
+                _loginMVCRepository.UpdateFakePerson(fakePerson);//This will Update the category object(made by the user input) to the category table. This keeps track of the changes
                 TempData["success"] = "Category updated succesfully";
                 return RedirectToAction("Data");//This will refresh the database table and show the new stuff
             }
-            return View(obj);//stays on the create category page
+            return View(fakePerson);//stays on the create category page
         }
 
-        public IActionResult Delete(int? id)//This is a server side check
+        public async Task<IActionResult> Delete(int id)//This is a server side check
         {
             if (id == null || id == 0)
             {
                 return NotFound();
             }
-            FakePersonData? FakePersonFromDb = _context.FakePeople.Find(id);//will work off the primary key off the model
+            var getPersonID = await _loginMVCRepository.GetIdAsync(id); //will work off the primary key off the model
 
-            if (FakePersonFromDb == null)
+            if (getPersonID == null)
             {
                 return NotFound();
             }
-            return View(FakePersonFromDb);
+            return View(getPersonID);
         }
 
         [HttpPost, ActionName("Delete")]//this returns the input from the user side to the back-end and the actionName is "Delete"
         //send data to a server to create/update a resource
         [Authorize(Roles = "Admin")]
-        public IActionResult DeletePOST(int? id)
+        public async Task<IActionResult> DeletePOST(int id)
         {
-            FakePersonData? obj = _context.FakePeople.Find(id);
+            var getPersonID = await _loginMVCRepository.GetIdAsync(id);
 
-            if(obj == null)
+            if(getPersonID == null)
             {
                 return NotFound();
             }
-            _context.FakePeople.Remove(obj);
-            _context.SaveChanges();
+            _loginMVCRepository.DeleteFakePerson(id);
             TempData["success"] = "Category deleted succesfully";
             return RedirectToAction("Data");
         }
