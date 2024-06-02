@@ -1,4 +1,6 @@
-﻿@inject SignInManager<LoginMVC_DatabaseUser> SignInManager
+﻿@using LoginMVC_Database.Models
+
+@inject SignInManager<LoginMVC_DatabaseUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

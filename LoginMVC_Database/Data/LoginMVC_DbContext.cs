@@ -1,5 +1,4 @@
-﻿using LoginMVC_Database.Areas.Identity.Data;
-using LoginMVC_Database.Models;
+﻿using LoginMVC_Database.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

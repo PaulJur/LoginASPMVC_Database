@@ -5,14 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
-namespace LoginMVC_Database.Areas.Identity.Data;
+namespace LoginMVC_Database.Models;
 
 // Add profile data for application users by adding properties to the LoginMVC_DatabaseUser class
 public class LoginMVC_DatabaseUser : IdentityUser
 {
     [PersonalData]
     [Column(TypeName = "nvarchar(100)")]
-   public string FirstName { get; set; }
+    public string FirstName { get; set; }
 
     [PersonalData]
     [Column(TypeName = "nvarchar(100)")]

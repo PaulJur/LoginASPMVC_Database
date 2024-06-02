@@ -17,7 +17,7 @@ namespace LoginMVC_Database.Controllers
         public IActionResult Data()
         {
             List<FakePersonData> objPersonDataList = _context.FakePeople.ToList();
-            if (User.Identity.IsAuthenticated && objPersonDataList != null)
+            if (User.Identity.IsAuthenticated && objPersonDataList != null)//checks if the user is logged in
             {
                 try
                 {

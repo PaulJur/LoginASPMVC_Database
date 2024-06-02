@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using LoginMVC_Database.Data;
-using LoginMVC_Database.Areas.Identity.Data;
 using LoginMVC_Database.Models;
+using LoginMVC_Database.Repository;
+using LoginMVC_Database.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("LoginMVC_DbContextConnection") ?? throw new InvalidOperationException("Connection string 'LoginMVC_DbContextConnection' not found.");
@@ -16,6 +17,7 @@ builder.Services.AddDefaultIdentity<LoginMVC_DatabaseUser>(options => options.Si
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped <ILoginMVCRepository, LoginMVCRepository>();
 
 builder.Services.AddSession();
 
